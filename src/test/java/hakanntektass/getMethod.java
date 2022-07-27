@@ -1,12 +1,10 @@
 package hakanntektass;
 
 import io.restassured.RestAssured;
-import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import javafx.scene.layout.Priority;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,11 +13,10 @@ public class getMethod {
 
     @Test (priority=1)
     public void getUserFirstPage(){
-
-        RestAssured.baseURI="https://reqres.in/api/";
+        RestAssured.baseURI="https://jsonplaceholder.typicode.com/";
         RequestSpecification httpRequest = RestAssured.given();
 
-        Response response = httpRequest.get("users?page=1");
+        Response response = httpRequest.get("posts");
         System.out.println("Sayfa 1" +":"+response.prettyPrint());
         System.out.println("Status Code"+ ":"+ response.statusCode());
 
@@ -88,6 +85,27 @@ public class getMethod {
         String bodyAsstring = body.asString();
 
         Assert.assertEquals(bodyAsstring.contains("holt"),true);
+
+    }
+    @Test (priority = 5)
+    public void postMethod_1(){
+
+        RestAssured.baseURI="https://jsonplaceholder.typicode.com/";
+
+        RequestSpecification httpRequest = RestAssured.given();
+
+
+        JSONObject reqParams = new JSONObject();
+        reqParams.put("title","fss");
+        reqParams.put("body","dede");
+        reqParams.put("userId","1");
+
+        httpRequest.body(reqParams.toJSONString());
+        Response response = httpRequest.post("posts");
+        ResponseBody body = response.getBody();
+
+        System.out.println("Post method Create user"+":" + response.statusCode());
+        System.out.println("Post method Create user" + response.prettyPrint());
 
     }
 
