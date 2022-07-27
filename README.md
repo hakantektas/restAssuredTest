@@ -1,11 +1,4 @@
 
-# Proje Başlığı
-
-Bu projenin ne yaptığı ve kimin için olduğu hakkında kısa bir açıklama
-
-
-# Project Title
-
 
 How to do Api Automation Tests with RestAssured, Java 1.8, testNg
 ## Badges
